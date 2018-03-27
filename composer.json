@@ -1,7 +1,7 @@
 {
 	"name": "symbiote/silverstripe-addressable",
 	"description": "SilverStripe addressable and geocoding module",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"keywords": ["silverstripe", "addressable", "geocoding"],
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -15,16 +15,15 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "3.*"
+		"silverstripe/framework": "^4",
+        "guzzlehttp/guzzle": "~6.3.2"
 	},
 	"extra": {
 		"installer-name": "addressable",
-		"branch-alias": {
-			"dev-master": "2.0.x-dev"
-		}
 	},
-	"replace": {
-		"ajshort/silverstripe-addressable": "self.version",
-		"silverstripe-australia/addressable": "self.version"
-	}
+    "autoload": {
+        "psr-4": {
+            "SilverStripeAddressable\Extensions;\\": "src/"
+        }
+    },
 }

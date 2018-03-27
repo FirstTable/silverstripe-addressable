@@ -1,4 +1,13 @@
 <?php
+
+namespace SilverStripeAddressable\Extensions;
+
+use SilverStripe\Config;
+use RestfulApi;
+use SilverStripe\Control\Director;
+use Exception;
+
+
 /**
  * A utility class for geocoding addresses using the google maps API.
  *
@@ -15,11 +24,11 @@ class GoogleGeocoding {
 	 */
 	public static function address_to_point($address, $region = null) {
 		// Get the URL for the Google API
-		$url = Config::inst()->get('GoogleGeocoding', 'google_api_url');
-		$key = Config::inst()->get('GoogleGeocoding', 'google_api_key');
+		$url = Config::inst()->get(GoogleGeocoding::class, 'google_api_url');
+		$key = Config::inst()->get(GoogleGeocoding::class, 'google_api_key');
 
 		// Query the Google API
-		$service = new RestfulService($url);
+		$service = new RestfulService($url); // todo
 		$service->setQueryString(array(
 			'address' => $address,
 			'sensor'  => 'false',

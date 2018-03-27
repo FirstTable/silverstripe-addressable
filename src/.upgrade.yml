@@ -1,0 +1,5 @@
+mappings:
+  GoogleGeocoding: SilverStripeAddressable\Extensions\GoogleGeocoding
+  Addressable: SilverStripeAddressable\Extensions\Addressable
+  Geocodable: SilverStripeAddressable\Extensions\Geocodable
+  RegexTextField: SilverStripeAddressable\Fields\RegexTextField

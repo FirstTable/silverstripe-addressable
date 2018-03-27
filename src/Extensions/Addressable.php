@@ -1,4 +1,19 @@
 <?php
+
+namespace SilverStripeAddressable\Extensions;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Config;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\DropdownField;
+use Zend_Locale;
+use SilverStripe\i18n\i18n;
+use SilverStripeAddressable\Fields\RegexTextField;
+use SilverStripeAddressable\Extensions\GoogleGeocoding;
+
+
 /**
  * Adds simple address fields to an object, as well as fields to manage them.
  *
@@ -67,7 +82,7 @@ class Addressable extends DataExtension {
 	public function __construct() {
 		$this->allowedStates    = self::$allowed_states;
 		$this->allowedCountries = self::$allowed_countries;
-		$customRegex = Config::inst()->get('Addressable', 'set_postcode_regex');
+		$customRegex = Config::inst()->get(Addressable::class, 'set_postcode_regex');
                 if (!empty($customRegex)) {
                     self::set_postcode_regex($customRegex);
                 }
@@ -150,7 +165,7 @@ class Addressable extends DataExtension {
 		if (is_array($this->allowedCountries)) {
 			$fields[] = new DropdownField('Country', $label, $this->allowedCountries);
 		} elseif (!is_string($this->allowedCountries)) {
-			$fields[] = new CountryDropdownField('Country', $label);
+			$fields[] = new DropdownField('Country', $label);
 		}
 		$this->owner->extend("updateAddressFields", $fields);
 
@@ -210,7 +225,7 @@ class Addressable extends DataExtension {
 			'Height'   => $height,
 			'Scale'    => $scale,
 			'Address'  => rawurlencode($this->getFullAddress()),
-			'Key'      => Config::inst()->get('GoogleGeocoding', 'google_api_key')
+			'Key'      => Config::inst()->get(GoogleGeocoding::class, 'google_api_key')
 		));
 		return $data->renderWith('AddressMap');
 	}

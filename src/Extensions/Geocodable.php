@@ -1,5 +1,21 @@
 <?php
 
+namespace SilverStripeAddressable\Extensions;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Config;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripeAddressable\Extensions\Addressable;
+
+
+
 /**
  * Adds automatic geocoding to a {@link Addressable} object. Uses the Google
  * Maps API to save latitude and longitude on write.
@@ -17,7 +33,7 @@ class Geocodable extends DataExtension
 
     public function onBeforeWrite()
     {
-        if (!Config::inst()->get('Geocodable', 'is_geocodable')) {
+        if (!Config::inst()->get(Geocodable::class, 'is_geocodable')) {
             return;
         }
         if ($this->owner->LatLngOverride) {
@@ -60,7 +76,7 @@ class Geocodable extends DataExtension
             $compositeField->push(ReadonlyField::create('Lat_Readonly', 'Lat', $this->owner->Lat));
             $compositeField->push(ReadonlyField::create('Lng_Readonly', 'Lng', $this->owner->Lng));
         }
-        if ($this->owner->hasExtension('Addressable')) {
+        if ($this->owner->hasExtension(Addressable::class)) {
             // If using addressable, put the fields with it
             $fields->addFieldToTab('Root.Address', ToggleCompositeField::create('Coordinates', 'Coordinates', $compositeField));
         } else if ($this->owner instanceof SiteTree) {
