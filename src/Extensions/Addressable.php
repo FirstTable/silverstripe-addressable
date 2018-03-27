@@ -3,7 +3,7 @@
 namespace SilverStripeAddressable\Extensions;
 
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\Config;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HeaderField;
@@ -93,7 +93,7 @@ class Addressable extends DataExtension {
 
 	private static $db = array(
 		'Address'  => 'Varchar(255)',
-		'Suburb'   => 'varchar(64)',
+		'Suburb'   => 'Varchar(64)',
 		'State'    => 'Varchar(64)',
 		'Postcode' => 'Varchar(10)',
 		'Country'  => 'Varchar(2)'
