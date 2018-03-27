@@ -23,7 +23,7 @@
 	},
     "autoload": {
         "psr-4": {
-            "SilverStripeAddressable\Extensions;\\": "src/"
+            "SilverStripeAddressable\\Extensions;\\": "src/"
         }
     }
 }
