@@ -15,8 +15,7 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "^4",
-        "guzzlehttp/guzzle": "~6.3.2"
+		"silverstripe/framework": "^4"
 	},
 	"extra": {
 		"installer-name": "addressable"
